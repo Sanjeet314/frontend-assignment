@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import usePaginate from "./usePaginate";
 
 const usePaginatedTable = (url, columns, itemsPerPage) => {
 
     const [rows, setRows] = useState([]);
-    const [page, setPage] = useState(1); // by default we are on page 1
+    const {page, selectPageHandler} = usePaginate({data: rows, itemsPerPage});
+
 
     const fetchData = async () => {
         const res = await fetch(url);
@@ -18,12 +20,7 @@ const usePaginatedTable = (url, columns, itemsPerPage) => {
         fetchData();
     }, [])
 
-    const selectPageHandler = (selectedPage) => {
-        const totalPages = Math.ceil(rows.length / itemsPerPage);
-        if (selectedPage >= 1 && selectedPage <= totalPages && selectedPage !== page) {
-          setPage(selectedPage);
-        }
-    }
+
 
     return {rows, columns, page, itemsPerPage, selectPageHandler}
 }
