@@ -1,7 +1,7 @@
 import React from 'react';
 import TableComponent from './components/Table/TableComponent';
-import Paginate from './components/Paginate/PaginateComponent';
 import usePaginatedTable from './components/hooks/usePaginatedTable';
+import PaginateSimpleComponent from './components/PaginateSimple/PaginateSimpleComponent';
 
 const url = 'https://raw.githubusercontent.com/saaslabsco/frontend-assignment/refs/heads/master/frontend-assignment.json';
 const columnsTable = [
@@ -16,7 +16,7 @@ const App = () => {
     
     return <div>
         {rows.length > 0 && <TableComponent columns={columns} rows={rows.slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage)}/>}
-        {rows.length > 0 && <Paginate page={page} data={rows} selectPageHandler={selectPageHandler} itemsPerPage={itemsPerPage} />}
+        {rows.length > 0 && <PaginateSimpleComponent page={page} data={rows} selectPageHandler={selectPageHandler} itemsPerPage={itemsPerPage} />}
     </div>
 };
 
